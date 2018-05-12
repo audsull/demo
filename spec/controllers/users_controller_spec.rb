@@ -11,4 +11,15 @@ RSpec.describe UsersController do
       expect(assigns(:user)).to eq(user)
     end
   end
+
+  describe 'POST create' do
+    let!(:blob) do
+      { email: 'doug@email.com', password: 'password' }
+    end
+
+    it 'creates a new user' do
+      post :create, params: { user: blob }
+      expect(User.count).to be 1
+    end
+  end
 end
