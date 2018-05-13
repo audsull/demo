@@ -1,3 +1,7 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+
 development:
   adapter: postgresql
   database: demo_development
@@ -11,7 +15,12 @@ test:
   timeout: 5000
 
 production:
+  <<: *default
+  host: localhost
   adapter: postgresql
+  encoding: utf8
   database: demo_production
   pool: 5
   timeout: 5000
+  username: <%= ENV['APPNAME_DATABASE_USER'] %>
+  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
